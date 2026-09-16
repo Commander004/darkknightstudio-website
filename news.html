@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اخبار — DARKKNIGHT STUDIO</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><span class="logo-icon">⚔</span><span class="logo-text">DARKKNIGHT</span></a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">خانه</a>
+        <a href="projects.html" class="nav-link">پروژه‌ها</a>
+        <a href="news.html" class="nav-link active">اخبار</a>
+        <a href="support.html" class="nav-link">پشتیبانی</a>
+        <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle">☀</button>
+        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="page-hero"><div class="container"><h1>اخبار</h1><p>آخرین اخبار استودیو</p></div></div>
+  <section class="section"><div class="container">
+    <div class="news-grid" id="news-grid"><div class="loading-state"><div class="spinner"></div></div>
+  </div></section>
+  <div id="toast-container" class="toast-container"></div>
+  <script>window.DK_CONFIG = {
+     SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
+     SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+};</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      document.getElementById('menu-toggle')?.addEventListener('click', function() {
+        this.classList.toggle('open');
+        document.getElementById('nav').classList.toggle('open');
+      });
+      if (!DK.isConfigured) {
+        document.getElementById('news-grid').innerHTML = '<div class="empty-state"><p>Supabase تنظیم نشده</p></div>';
+        return;
+      }
+      const { data } = await DK.supabase.from('news').select('*').eq('status','PUBLISHED').order('published_at',{ascending:false});
+      const grid = document.getElementById('news-grid');
+      if (!data?.length) { grid.innerHTML = '<div class="empty-state"><p>خبری نیست</p></div>'; return; }
+      grid.innerHTML = data.map(n => `
+        <article class="news-card">
+          <div class="news-image">${n.image_url?`<img src="${DK.escapeHtml(n.image_url)}" loading="lazy">`:''}</div>
+          <div class="news-body">
+            <div class="news-date">${DK.formatDate(n.published_at||n.created_at)}</div>
+            <h3 class="news-title">${DK.escapeHtml(n.title)}</h3>
+            <p class="news-excerpt">${DK.escapeHtml(n.content)}</p>
+          </div>
+        </article>`).join('');
+    });
+  </script>
+</body>
+</html>
