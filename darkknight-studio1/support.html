@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="پشتیبانی DARKKNIGHT STUDIO">
+  <title>پشتیبانی — DARKKNIGHT STUDIO</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .support-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    @media (max-width: 768px) {
+      .support-layout { grid-template-columns: 1fr; }
+    }
+    .support-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .support-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .support-card > p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    .chat-box {
+      display: none;
+      flex-direction: column;
+      height: 500px;
+    }
+    .chat-box.active { display: flex; }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .chat-msg {
+      margin-bottom: 12px;
+      max-width: 85%;
+    }
+    .chat-msg.user { margin-right: auto; }
+    .chat-msg.admin { margin-left: auto; }
+    .chat-msg .bubble {
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .chat-msg.user .bubble {
+      background: var(--primary-muted);
+      border: 1px solid rgba(232,185,35,0.2);
+    }
+    .chat-msg.admin .bubble {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .chat-msg .meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input-row input {
+      flex: 1;
+    }
+    .ticket-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding: 10px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">⚔</span>
+          <span class="logo-text">DARKKNIGHT</span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="index.html" class="nav-link">خانه</a>
+          <a href="projects.html" class="nav-link">پروژه‌ها</a>
+          <a href="news.html" class="nav-link">اخبار</a>
+          <a href="support.html" class="nav-link active">پشتیبانی</a>
+          <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
+        </nav>
+        <div class="header-actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="تغییر تم">☀</button>
+          <button class="menu-toggle" id="menu-toggle" aria-label="منو"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-hero">
+      <div class="container">
+        <h1>پشتیبانی</h1>
+        <p>تیکت بساز یا به تیکت قبلی‌ات وصل شو. نیازی به ساخت اکانت نداری.</p>
+      </div>
+    </div>
+
+    <div class="support-layout">
+      <!-- Create Ticket -->
+      <div class="support-card" id="create-card">
+        <h2>ثبت تیکت جدید</h2>
+        <p>مشکلت رو بگو، تیم پشتیبانی جواب می‌ده.</p>
+        <form id="ticket-form">
+          <div class="form-group">
+            <label class="form-label">نام شما</label>
+            <input type="text" class="form-input" id="t-name" required maxlength="80" placeholder="نام یا نام مستعار">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ایمیل (اختیاری)</label>
+            <input type="email" class="form-input" id="t-email" maxlength="120" placeholder="برای اطلاع‌رسانی">
+          </div>
+          <div class="form-group">
+            <label class="form-label">موضوع</label>
+            <input type="text" class="form-input" id="t-subject" required maxlength="150" placeholder="موضوع تیکت">
+          </div>
+          <div class="form-group">
+            <label class="form-label">دسته‌بندی</label>
+            <select class="form-select" id="t-category">
+              <option value="general">عمومی</option>
+              <option value="technical">فنی</option>
+              <option value="bug">گزارش باگ</option>
+              <option value="suggestion">پیشنهاد</option>
+              <option value="other">سایر</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">اولویت</label>
+            <select class="form-select" id="t-priority">
+              <option value="low">کم</option>
+              <option value="normal" selected>عادی</option>
+              <option value="high">بالا</option>
+              <option value="urgent">فوری</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">پیام</label>
+            <textarea class="form-textarea" id="t-message" required maxlength="3000" placeholder="توضیح کامل مشکل..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">ثبت تیکت</button>
+        </form>
+      </div>
+
+      <!-- Access existing / Chat -->
+      <div class="support-card">
+        <div id="access-box">
+          <h2>دسترسی به تیکت قبلی</h2>
+          <p>کد دسترسی تیکت رو وارد کن.</p>
+          <div class="form-group">
+            <label class="form-label">کد دسترسی</label>
+            <input type="text" class="form-input" id="access-token" placeholder="کد تیکت" maxlength="64">
+          </div>
+          <button class="btn btn-secondary" id="access-btn" style="width:100%">ورود به تیکت</button>
+        </div>
+
+        <div class="chat-box" id="chat-box">
+          <div class="ticket-info" id="ticket-info"></div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input-row">
+            <input type="text" class="form-input" id="chat-input" placeholder="پیامت رو بنویس..." maxlength="2000">
+            <button class="btn btn-primary" id="chat-send">ارسال</button>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="leave-chat" style="margin-top:12px">خروج از تیکت</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+  </div>
+
+  <script>
+    window.DK_CONFIG = {
+      SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
+      SUPABASE_ANON_KEY: 'https://exaryvtjayuwgyqnioem.supabase.co',
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/support.js"></script>
+</body>
+</html>

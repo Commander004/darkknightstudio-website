@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پروژه‌ها — DARKKNIGHT STUDIO</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><span class="logo-icon">⚔</span><span class="logo-text">DARKKNIGHT</span></a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">خانه</a>
+        <a href="projects.html" class="nav-link active">پروژه‌ها</a>
+        <a href="news.html" class="nav-link">اخبار</a>
+        <a href="support.html" class="nav-link">پشتیبانی</a>
+        <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle">☀</button>
+        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>پروژه‌ها</h1>
+      <p>همه پروژه‌های DARKKNIGHT STUDIO</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="projects-grid" id="projects-grid">
+        <div class="loading-state"><div class="spinner"></div><p>بارگذاری...</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>
+    window.DK_CONFIG = {
+       SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
+       SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+};
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const toggle = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav');
+      toggle?.addEventListener('click', () => { toggle.classList.toggle('open'); nav.classList.toggle('open'); });
+
+      if (!DK.isConfigured) {
+        document.getElementById('projects-grid').innerHTML = '<div class="empty-state"><p>Supabase تنظیم نشده</p></div>';
+        return;
+      }
+      const { data } = await DK.supabase.from('projects').select('*').neq('status','ARCHIVED').order('display_order');
+      const grid = document.getElementById('projects-grid');
+      if (!data?.length) {
+        grid.innerHTML = '<div class="empty-state"><p>پروژه‌ای نیست</p></div>';
+        return;
+      }
+      grid.innerHTML = data.map(p => `
+        <article class="project-card">
+          <div class="project-banner">
+            ${p.banner_url ? `<img src="${DK.escapeHtml(p.banner_url)}" alt="" loading="lazy">` : ''}
+            <span class="project-status ${DK.statusClass(p.status)}">${DK.statusLabel(p.status)}</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">${DK.escapeHtml(p.title)}</h3>
+            <p class="project-desc">${DK.escapeHtml(p.description || '')}</p>
+            <div class="project-meta">
+              ${(p.tags||[]).map(t=>`<span class="tag">${DK.escapeHtml(t)}</span>`).join('')}
+              ${(p.technologies||[]).map(t=>`<span class="tech">${DK.escapeHtml(t)}</span>`).join('')}
+            </div>
+          </div>
+        </article>
+      `).join('');
+    });
+  </script>
+</body>
+</html>
