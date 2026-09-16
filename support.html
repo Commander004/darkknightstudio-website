@@ -319,7 +319,13 @@
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" id="theme-toggle" aria-label="تغییر تم" title="تغییر تم">
+
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="تغییر تم"
+        title="تغییر تم"
+      >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -331,6 +337,7 @@
         <span></span>
         <span></span>
       </button>
+
     </div>
 
   </div>
@@ -342,13 +349,17 @@
   <div class="container">
 
     <div class="support-hero">
+
       <span class="section-tag">پشتیبانی DARKKNIGHT</span>
+
       <h1 class="section-title">
         چطور می‌تونیم <span class="gradient-text">کمکت کنیم؟</span>
       </h1>
+
       <p>
         درخواستت رو ثبت کن و از طریق همین صفحه با تیم DARKKNIGHT STUDIO در ارتباط باش.
       </p>
+
     </div>
 
     <div class="support-grid">
@@ -369,6 +380,7 @@
             <div class="form-row">
 
               <div class="form-group">
+
                 <label for="t-name">
                   نام <span class="required">*</span>
                 </label>
@@ -381,9 +393,11 @@
                   placeholder="نام شما"
                   required
                 >
+
               </div>
 
               <div class="form-group">
+
                 <label for="t-email">
                   ایمیل
                 </label>
@@ -395,6 +409,7 @@
                   autocomplete="email"
                   placeholder="example@email.com"
                 >
+
               </div>
 
             </div>
@@ -424,11 +439,13 @@
                 </label>
 
                 <select id="t-category">
+
                   <option value="GENERAL">عمومی</option>
                   <option value="BUG">گزارش مشکل</option>
                   <option value="PROJECT">پروژه</option>
                   <option value="ACCOUNT">حساب کاربری</option>
                   <option value="OTHER">سایر</option>
+
                 </select>
 
               </div>
@@ -439,11 +456,14 @@
                   اولویت
                 </label>
 
+                <!-- FIX: مقادیر دقیقاً مطابق CHECK constraint دیتابیس -->
                 <select id="t-priority">
-                  <option value="LOW">کم</option>
-                  <option value="NORMAL" selected>عادی</option>
-                  <option value="HIGH">زیاد</option>
-                  <option value="URGENT">فوری</option>
+
+                  <option value="low">کم</option>
+                  <option value="normal" selected>عادی</option>
+                  <option value="high">زیاد</option>
+                  <option value="urgent">فوری</option>
+
                 </select>
 
               </div>
@@ -488,7 +508,11 @@
                 placeholder="کد دسترسی تیکت"
               >
 
-              <button id="access-btn" type="button" class="btn btn-secondary">
+              <button
+                id="access-btn"
+                type="button"
+                class="btn btn-secondary"
+              >
                 باز کردن
               </button>
 
@@ -526,7 +550,11 @@
               placeholder="پیامت رو بنویس..."
             ></textarea>
 
-            <button id="chat-send" type="button" class="btn btn-primary">
+            <button
+              id="chat-send"
+              type="button"
+              class="btn btn-primary"
+            >
               ارسال
             </button>
 
@@ -534,7 +562,11 @@
 
           <div class="chat-actions">
 
-            <button id="leave-chat" type="button" class="btn btn-secondary">
+            <button
+              id="leave-chat"
+              type="button"
+              class="btn btn-secondary"
+            >
               بازگشت
             </button>
 
@@ -556,35 +588,47 @@
         <div class="support-info">
 
           <div class="support-info-item">
+
             <div class="support-info-icon">🎫</div>
+
             <div>
               <strong>تیکت اختصاصی</strong>
               <span>برای هر درخواست یک گفت‌وگوی جداگانه ساخته می‌شود.</span>
             </div>
+
           </div>
 
           <div class="support-info-item">
+
             <div class="support-info-icon">💬</div>
+
             <div>
               <strong>گفت‌وگوی آنلاین</strong>
               <span>پاسخ‌های جدید بدون نیاز به رفرش صفحه نمایش داده می‌شوند.</span>
             </div>
+
           </div>
 
           <div class="support-info-item">
+
             <div class="support-info-icon">🔐</div>
+
             <div>
               <strong>کد دسترسی</strong>
               <span>برای مشاهده تیکت قبلی از کد دسترسی خودت استفاده کن.</span>
             </div>
+
           </div>
 
           <div class="support-info-item">
+
             <div class="support-info-icon">⚡</div>
+
             <div>
               <strong>پیگیری درخواست</strong>
               <span>وضعیت تیکت داخل گفت‌وگو نمایش داده می‌شود.</span>
             </div>
+
           </div>
 
         </div>
@@ -668,4 +712,4 @@
       SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
     };
   </script>  <!-- Libraries -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <!-- DARKKNIGHT Scripts -->  <script src="js/utils.js"></script>  <script src="js/supabase.js"></script>  <script src="js/theme.js"></script>  <script src="js/support.js"></script></body>
-</html>
+  </html>
