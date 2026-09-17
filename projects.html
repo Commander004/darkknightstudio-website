@@ -1,92 +1,1075 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پروژه‌ها — DARKKNIGHT STUDIO</title>
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header class="header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo"><span class="logo-icon">⚔</span><span class="logo-text">DARKKNIGHT</span></a>
-      <nav class="nav" id="nav">
-        <a href="index.html" class="nav-link">خانه</a>
-        <a href="projects.html" class="nav-link active">پروژه‌ها</a>
-        <a href="news.html" class="nav-link">اخبار</a>
-        <a href="support.html" class="nav-link">پشتیبانی</a>
-        <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
-      </nav>
-      <div class="header-actions">
-        <button class="theme-toggle" id="theme-toggle">☀</button>
-        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </header>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta
+name="description"
+content="پروژه‌های DARKKNIGHT STUDIO"
 
-  <div class="page-hero">
-    <div class="container">
-      <h1>پروژه‌ها</h1>
-      <p>همه پروژه‌های DARKKNIGHT STUDIO</p>
-    </div>
+«»
+
+  <meta name="theme-color" content="#0a0a0f">  <title>پروژه‌ها — DARKKNIGHT STUDIO</title>  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>"
+  >  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >  <style>
+
+    /* ================================
+       Project Details
+    ================================= */
+
+    .project-details {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-detail-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .project-detail-banner {
+      position: relative;
+      width: 100%;
+      min-height: 280px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .project-detail-banner img {
+      display: block;
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    .project-detail-status {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 2;
+    }
+
+    .project-detail-body {
+      padding: 32px;
+    }
+
+    .project-detail-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .project-detail-description {
+      color: var(--text-muted);
+      line-height: 2;
+      font-size: 1rem;
+      white-space: pre-wrap;
+      margin-bottom: 28px;
+    }
+
+    .project-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .project-detail-meta .tag,
+    .project-detail-meta .tech {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .project-detail-meta .tech {
+      color: var(--primary);
+    }
+
+    .project-back {
+      margin-bottom: 20px;
+    }
+
+    .project-back .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-card {
+      cursor: pointer;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(
+        in srgb,
+        var(--primary) 45%,
+        var(--border)
+      );
+    }
+
+    .project-card:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    .project-detail-error {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .project-detail-error-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .project-detail-error h2 {
+      margin-bottom: 10px;
+    }
+
+    .project-detail-error p {
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 600px) {
+
+      .project-detail-body {
+        padding: 22px;
+      }
+
+      .project-detail-banner {
+        min-height: 200px;
+      }
+
+      .project-detail-title {
+        font-size: 1.8rem;
+      }
+
+    }
+
+  </style></head><body>  <!-- Header -->  <header class="header"><div class="container header-inner">
+
+  <a href="index.html" class="logo">
+
+    <span class="logo-icon">⚔</span>
+
+    <span class="logo-text">
+      DARKKNIGHT
+    </span>
+
+  </a>
+
+
+  <nav class="nav" id="nav">
+
+    <a
+      href="index.html"
+      class="nav-link"
+    >
+      خانه
+    </a>
+
+    <a
+      href="projects.html"
+      class="nav-link active"
+    >
+      پروژه‌ها
+    </a>
+
+    <a
+      href="news.html"
+      class="nav-link"
+    >
+      اخبار
+    </a>
+
+    <a
+      href="support.html"
+      class="nav-link"
+    >
+      پشتیبانی
+    </a>
+
+    <a
+      href="admin.html"
+      class="nav-link nav-admin"
+    >
+      پنل مدیریت
+    </a>
+
+  </nav>
+
+
+  <div class="header-actions">
+
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      aria-label="تغییر تم"
+    >
+      ☀
+    </button>
+
+
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-label="منو"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
   </div>
 
-  <section class="section">
-    <div class="container">
-      <div class="projects-grid" id="projects-grid">
-        <div class="loading-state"><div class="spinner"></div><p>بارگذاری...</p></div>
-      </div>
+</div>
+
+  </header>  <!-- Hero -->  <div class="page-hero"><div class="container">
+
+  <h1 id="page-title">
+    پروژه‌ها
+  </h1>
+
+  <p id="page-description">
+    همه پروژه‌های DARKKNIGHT STUDIO
+  </p>
+
+</div>
+
+  </div>  <!-- Main -->  <main class="section"><div class="container">
+
+
+  <!-- Projects List -->
+
+  <div
+    class="projects-grid"
+    id="projects-grid"
+  >
+
+    <div class="loading-state">
+
+      <div class="spinner"></div>
+
+      <p>
+        بارگذاری...
+      </p>
+
     </div>
-  </section>
 
-  <div id="toast-container" class="toast-container"></div>
+  </div>
 
-  <script>
+
+  <!-- Project Details -->
+
+  <div
+    id="project-details"
+    class="project-details"
+    style="display: none;"
+  >
+
+    <div class="project-back">
+
+      <button
+        id="back-to-projects"
+        type="button"
+        class="btn btn-secondary"
+      >
+        ← بازگشت به پروژه‌ها
+      </button>
+
+    </div>
+
+
+    <article class="project-detail-card">
+
+      <div
+        id="project-detail-banner"
+        class="project-detail-banner"
+      >
+      </div>
+
+
+      <div class="project-detail-body">
+
+        <h1
+          id="project-detail-title"
+          class="project-detail-title"
+        ></h1>
+
+
+        <div
+          id="project-detail-meta"
+          class="project-detail-meta"
+        ></div>
+
+
+        <div
+          id="project-detail-description"
+          class="project-detail-description"
+        ></div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- Error -->
+
+  <div
+    id="project-error"
+    class="project-detail-error"
+    style="display: none;"
+  >
+
+    <div class="project-detail-error-icon">
+      ⚠️
+    </div>
+
+    <h2>
+      پروژه پیدا نشد
+    </h2>
+
+    <p>
+      این پروژه وجود ندارد یا دیگر در دسترس نیست.
+    </p>
+
+    <button
+      id="error-back-button"
+      type="button"
+      class="btn btn-secondary"
+    >
+      ← بازگشت به پروژه‌ها
+    </button>
+
+  </div>
+
+</div>
+
+  </main>  <!-- Toast -->  <div
+    id="toast-container"
+    class="toast-container"
+  ></div>  <!-- Supabase Config -->  <script>
+
     window.DK_CONFIG = {
-       SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
-       SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
-};
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/theme.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const toggle = document.getElementById('menu-toggle');
-      const nav = document.getElementById('nav');
-      toggle?.addEventListener('click', () => { toggle.classList.toggle('open'); nav.classList.toggle('open'); });
 
-      if (!DK.isConfigured) {
-        document.getElementById('projects-grid').innerHTML = '<div class="empty-state"><p>Supabase تنظیم نشده</p></div>';
-        return;
-      }
-      const { data } = await DK.supabase.from('projects').select('*').neq('status','ARCHIVED').order('display_order');
-      const grid = document.getElementById('projects-grid');
-      if (!data?.length) {
-        grid.innerHTML = '<div class="empty-state"><p>پروژه‌ای نیست</p></div>';
-        return;
-      }
-      grid.innerHTML = data.map(p => `
-        <article class="project-card">
-          <div class="project-banner">
-            ${p.banner_url ? `<img src="${DK.escapeHtml(p.banner_url)}" alt="" loading="lazy">` : ''}
-            <span class="project-status ${DK.statusClass(p.status)}">${DK.statusLabel(p.status)}</span>
-          </div>
-          <div class="project-body">
-            <h3 class="project-title">${DK.escapeHtml(p.title)}</h3>
-            <p class="project-desc">${DK.escapeHtml(p.description || '')}</p>
-            <div class="project-meta">
-              ${(p.tags||[]).map(t=>`<span class="tag">${DK.escapeHtml(t)}</span>`).join('')}
-              ${(p.technologies||[]).map(t=>`<span class="tech">${DK.escapeHtml(t)}</span>`).join('')}
+      SUPABASE_URL:
+        'https://exaryvtjayuwgyqnioem.supabase.co',
+
+      SUPABASE_ANON_KEY:
+        'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+
+    };
+
+  </script>  <!-- Libraries -->  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>  <!-- DARKKNIGHT Scripts -->  <script src="js/utils.js"></script>  <script src="js/supabase.js"></script>  <script src="js/theme.js"></script>  <!-- Projects -->  <script>
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      async () => {
+
+        /* ================================
+           Elements
+        ================================= */
+
+        const grid =
+          document.getElementById(
+            'projects-grid'
+          );
+
+        const details =
+          document.getElementById(
+            'project-details'
+          );
+
+        const errorBox =
+          document.getElementById(
+            'project-error'
+          );
+
+        const pageTitle =
+          document.getElementById(
+            'page-title'
+          );
+
+        const pageDescription =
+          document.getElementById(
+            'page-description'
+          );
+
+        const backButton =
+          document.getElementById(
+            'back-to-projects'
+          );
+
+        const errorBackButton =
+          document.getElementById(
+            'error-back-button'
+          );
+
+        const menuToggle =
+          document.getElementById(
+            'menu-toggle'
+          );
+
+        const nav =
+          document.getElementById(
+            'nav'
+          );
+
+
+        /* ================================
+           Mobile Menu
+        ================================= */
+
+        menuToggle?.addEventListener(
+          'click',
+          () => {
+
+            menuToggle.classList.toggle(
+              'open'
+            );
+
+            nav.classList.toggle(
+              'open'
+            );
+
+          }
+        );
+
+
+        /* ================================
+           Back
+        ================================= */
+
+        function goBack() {
+
+          /*
+           * If the browser has a previous
+           * page, use it.
+           *
+           * Otherwise go directly to
+           * projects.html.
+           */
+
+          if (
+            window.history.length > 1 &&
+            document.referrer
+          ) {
+
+            window.history.back();
+
+          } else {
+
+            window.location.href =
+              'projects.html';
+
+          }
+
+        }
+
+
+        backButton?.addEventListener(
+          'click',
+          goBack
+        );
+
+
+        errorBackButton?.addEventListener(
+          'click',
+          () => {
+
+            window.location.href =
+              'projects.html';
+
+          }
+        );
+
+
+        /* ================================
+           Supabase Check
+        ================================= */
+
+        if (
+          !window.DK ||
+          !window.DK.isConfigured ||
+          !window.DK.supabase
+        ) {
+
+          grid.innerHTML = `
+            <div class="empty-state">
+              <p>
+                Supabase تنظیم نشده است.
+              </p>
             </div>
-          </div>
-        </article>
-      `).join('');
-    });
-  </script>
-</body>
-</html>
+          `;
+
+          return;
+
+        }
+
+
+        /* ================================
+           URL ID
+        ================================= */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+        const projectId =
+          params.get('id');
+
+
+        /* ================================
+           Load Single Project
+        ================================= */
+
+        if (projectId) {
+
+          await loadProject(
+            projectId
+          );
+
+          return;
+
+        }
+
+
+        /* ================================
+           Load All Projects
+        ================================= */
+
+        await loadProjects();
+
+
+        /* ================================
+           Load Projects
+        ================================= */
+
+        async function loadProjects() {
+
+          try {
+
+            const { data, error } =
+              await window.DK.supabase
+                .from('projects')
+                .select('*')
+                .neq(
+                  'status',
+                  'ARCHIVED'
+                )
+                .order(
+                  'display_order'
+                );
+
+
+            if (error) {
+
+              throw error;
+
+            }
+
+
+            if (!data?.length) {
+
+              grid.innerHTML = `
+                <div class="empty-state">
+                  <p>
+                    پروژه‌ای نیست
+                  </p>
+                </div>
+              `;
+
+              return;
+
+            }
+
+
+            grid.innerHTML =
+              data
+                .map(
+                  (project) =>
+                    createProjectCard(
+                      project
+                    )
+                )
+                .join('');
+
+
+            /*
+             * Add click handlers
+             */
+
+            grid
+              .querySelectorAll(
+                '[data-project-id]'
+              )
+              .forEach(
+                (card) => {
+
+                  card.addEventListener(
+                    'click',
+                    () => {
+
+                      const id =
+                        card.dataset.projectId;
+
+                      if (!id) {
+                        return;
+                      }
+
+                      window.location.href =
+                        `projects.html?id=${encodeURIComponent(id)}`;
+
+                    }
+                  );
+
+
+                  /*
+                   * Keyboard accessibility
+                   */
+
+                  card.addEventListener(
+                    'keydown',
+                    (event) => {
+
+                      if (
+                        event.key === 'Enter' ||
+                        event.key === ' '
+                      ) {
+
+                        event.preventDefault();
+
+                        const id =
+                          card.dataset.projectId;
+
+                        if (!id) {
+                          return;
+                        }
+
+                        window.location.href =
+                          `projects.html?id=${encodeURIComponent(id)}`;
+
+                      }
+
+                    }
+                  );
+
+                }
+              );
+
+
+          } catch (error) {
+
+            console.error(
+              'Projects error:',
+              error
+            );
+
+            grid.innerHTML = `
+              <div class="empty-state">
+                <p>
+                  خطا در بارگذاری پروژه‌ها
+                </p>
+              </div>
+            `;
+
+          }
+
+        }
+
+
+        /* ================================
+           Project Card
+        ================================= */
+
+        function createProjectCard(
+          project
+        ) {
+
+          const tags =
+            Array.isArray(project.tags)
+              ? project.tags
+              : [];
+
+
+          const technologies =
+            Array.isArray(
+              project.technologies
+            )
+              ? project.technologies
+              : [];
+
+
+          const banner =
+            project.banner_url
+              ? `
+                <img
+                  src="${window.DK.escapeHtml(project.banner_url)}"
+                  alt="${window.DK.escapeHtml(project.title || 'پروژه')}"
+                  loading="lazy"
+                >
+              `
+              : '';
+
+
+          return `
+
+            <article
+              class="project-card"
+              data-project-id="${window.DK.escapeHtml(String(project.id))}"
+              tabindex="0"
+              role="button"
+              aria-label="مشاهده جزئیات ${window.DK.escapeHtml(project.title || 'پروژه')}"
+            >
+
+              <div class="project-banner">
+
+                ${banner}
+
+                <span
+                  class="project-status ${window.DK.statusClass(project.status)}"
+                >
+                  ${window.DK.statusLabel(project.status)}
+                </span>
+
+              </div>
+
+
+              <div class="project-body">
+
+                <h3 class="project-title">
+
+                  ${window.DK.escapeHtml(
+                    project.title || ''
+                  )}
+
+                </h3>
+
+
+                <p class="project-desc">
+
+                  ${window.DK.escapeHtml(
+                    project.description || ''
+                  )}
+
+                </p>
+
+
+                <div class="project-meta">
+
+                  ${tags
+                    .map(
+                      (tag) =>
+                        `<span class="tag">${window.DK.escapeHtml(tag)}</span>`
+                    )
+                    .join('')}
+
+
+                  ${technologies
+                    .map(
+                      (tech) =>
+                        `<span class="tech">${window.DK.escapeHtml(tech)}</span>`
+                    )
+                    .join('')}
+
+                </div>
+
+
+                <div
+                  style="
+                    margin-top: 18px;
+                    color: var(--primary);
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                  "
+                >
+                  مشاهده جزئیات ←
+                </div>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+
+
+        /* ================================
+           Load Single Project
+        ================================= */
+
+        async function loadProject(
+          id
+        ) {
+
+          /*
+           * Hide list
+           */
+
+          grid.style.display =
+            'none';
+
+          errorBox.style.display =
+            'none';
+
+          details.style.display =
+            'none';
+
+
+          try {
+
+            const { data, error } =
+              await window.DK.supabase
+                .from('projects')
+                .select('*')
+                .eq(
+                  'id',
+                  id
+                )
+                .neq(
+                  'status',
+                  'ARCHIVED'
+                )
+                .maybeSingle();
+
+
+            if (error) {
+
+              throw error;
+
+            }
+
+
+            /*
+             * Project not found
+             */
+
+            if (!data) {
+
+              showProjectError();
+
+              return;
+
+            }
+
+
+            renderProjectDetails(
+              data
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              'Project detail error:',
+              error
+            );
+
+            showProjectError();
+
+          }
+
+        }
+
+
+        /* ================================
+           Render Details
+        ================================= */
+
+        function renderProjectDetails(
+          project
+        ) {
+
+          details.style.display =
+            'block';
+
+          errorBox.style.display =
+            'none';
+
+
+          pageTitle.textContent =
+            'جزئیات پروژه';
+
+          pageDescription.textContent =
+            'اطلاعات کامل پروژه DARKKNIGHT STUDIO';
+
+
+          const detailTitle =
+            document.getElementById(
+              'project-detail-title'
+            );
+
+
+          const detailDescription =
+            document.getElementById(
+              'project-detail-description'
+            );
+
+
+          const detailMeta =
+            document.getElementById(
+              'project-detail-meta'
+            );
+
+
+          const detailBanner =
+            document.getElementById(
+              'project-detail-banner'
+            );
+
+
+          detailTitle.textContent =
+            project.title || 'بدون عنوان';
+
+
+          detailDescription.textContent =
+            project.description || '';
+
+
+          /*
+           * Banner
+           */
+
+          if (project.banner_url) {
+
+            detailBanner.innerHTML = `
+              <img
+                src="${window.DK.escapeHtml(project.banner_url)}"
+                alt="${window.DK.escapeHtml(project.title || 'پروژه')}"
+              >
+            `;
+
+          } else {
+
+            detailBanner.innerHTML = '';
+
+          }
+
+
+          /*
+           * Status
+           */
+
+          let metaHTML = '';
+
+          metaHTML += `
+            <span
+              class="project-status ${window.DK.statusClass(project.status)}"
+            >
+              ${window.DK.statusLabel(project.status)}
+            </span>
+          `;
+
+
+          /*
+           * Tags
+           */
+
+          if (
+            Array.isArray(project.tags)
+          ) {
+
+            metaHTML +=
+              project.tags
+                .map(
+                  (tag) =>
+                    `<span class="tag">${window.DK.escapeHtml(tag)}</span>`
+                )
+                .join('');
+
+          }
+
+
+          /*
+           * Technologies
+           */
+
+          if (
+            Array.isArray(
+              project.technologies
+            )
+          ) {
+
+            metaHTML +=
+              project.technologies
+                .map(
+                  (tech) =>
+                    `<span class="tech">${window.DK.escapeHtml(tech)}</span>`
+                )
+                .join('');
+
+          }
+
+
+          detailMeta.innerHTML =
+            metaHTML;
+
+
+          /*
+           * Scroll to top
+           */
+
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+
+        }
+
+
+        /* ================================
+           Error
+        ================================= */
+
+        function showProjectError() {
+
+          grid.style.display =
+            'none';
+
+          details.style.display =
+            'none';
+
+          errorBox.style.display =
+            'block';
+
+          pageTitle.textContent =
+            'پروژه پیدا نشد';
+
+          pageDescription.textContent =
+            'این پروژه در دسترس نیست.';
+
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+
+        }
+
+      }
+    );
+
+  </script></body></html>
