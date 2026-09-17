@@ -1,67 +1,1276 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اخبار — DARKKNIGHT STUDIO</title>
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header class="header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo"><span class="logo-icon">⚔</span><span class="logo-text">DARKKNIGHT</span></a>
-      <nav class="nav" id="nav">
-        <a href="index.html" class="nav-link">خانه</a>
-        <a href="projects.html" class="nav-link">پروژه‌ها</a>
-        <a href="news.html" class="nav-link active">اخبار</a>
-        <a href="support.html" class="nav-link">پشتیبانی</a>
-        <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
-      </nav>
-      <div class="header-actions">
-        <button class="theme-toggle" id="theme-toggle">☀</button>
-        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </header>
-  <div class="page-hero"><div class="container"><h1>اخبار</h1><p>آخرین اخبار استودیو</p></div></div>
-  <section class="section"><div class="container">
-    <div class="news-grid" id="news-grid"><div class="loading-state"><div class="spinner"></div></div>
-  </div></section>
-  <div id="toast-container" class="toast-container"></div>
-  <script>window.DK_CONFIG = {
-     SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
-     SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
-};</script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/theme.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      document.getElementById('menu-toggle')?.addEventListener('click', function() {
-        this.classList.toggle('open');
-        document.getElementById('nav').classList.toggle('open');
-      });
-      if (!DK.isConfigured) {
-        document.getElementById('news-grid').innerHTML = '<div class="empty-state"><p>Supabase تنظیم نشده</p></div>';
-        return;
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>  <meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+«»
+
+<meta
+name="description"
+content="آخرین اخبار DARKKNIGHT STUDIO"
+
+«»
+
+<meta
+name="theme-color"
+content="#0a0a0f"
+
+«»
+
+  <title>اخبار — DARKKNIGHT STUDIO</title>  <link
+    rel="stylesheet"
+    href="css/themes.css"
+  >  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >  <link
+    rel="stylesheet"
+    href="css/responsive.css"
+  >  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+  >  <link
+    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >  <style>
+
+    /* ================================
+       News Details
+    ================================= */
+
+    .news-detail {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+
+    .news-detail-card {
+
+      background: var(--surface);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius-lg);
+
+      overflow: hidden;
+
+      box-shadow:
+        var(--shadow);
+
+    }
+
+
+    .news-detail-image {
+
+      width: 100%;
+
+      background:
+        var(--bg);
+
+      overflow: hidden;
+
+    }
+
+
+    .news-detail-image img {
+
+      display: block;
+
+      width: 100%;
+
+      max-height: 520px;
+
+      object-fit: cover;
+
+    }
+
+
+    .news-detail-body {
+
+      padding: 32px;
+
+    }
+
+
+    .news-detail-date {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        0.85rem;
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .news-detail-title {
+
+      font-size:
+        clamp(1.8rem, 5vw, 3rem);
+
+      line-height:
+        1.5;
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    .news-detail-content {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        1rem;
+
+      line-height:
+        2.2;
+
+      white-space:
+        pre-wrap;
+
+      word-break:
+        break-word;
+
+    }
+
+
+    .news-back {
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .news-back .btn {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+    }
+
+
+    /* ================================
+       News Cards
+    ================================= */
+
+    .news-card {
+
+      cursor:
+        pointer;
+
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+    }
+
+
+    .news-card:hover {
+
+      transform:
+        translateY(-4px);
+
+      border-color:
+        color-mix(
+          in srgb,
+          var(--primary) 45%,
+          var(--border)
+        );
+
+    }
+
+
+    .news-card:focus-visible {
+
+      outline:
+        2px solid
+        var(--primary);
+
+      outline-offset:
+        3px;
+
+    }
+
+
+    .news-read-more {
+
+      margin-top:
+        16px;
+
+      color:
+        var(--primary);
+
+      font-size:
+        0.9rem;
+
+      font-weight:
+        600;
+
+    }
+
+
+    /* ================================
+       Error
+    ================================= */
+
+    .news-detail-error {
+
+      max-width:
+        700px;
+
+      margin:
+        0 auto;
+
+      text-align:
+        center;
+
+      padding:
+        60px 20px;
+
+    }
+
+
+    .news-detail-error-icon {
+
+      font-size:
+        3rem;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .news-detail-error h2 {
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .news-detail-error p {
+
+      color:
+        var(--text-muted);
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .news-detail-body {
+
+        padding:
+          22px;
+
       }
-      const { data } = await DK.supabase.from('news').select('*').eq('status','PUBLISHED').order('published_at',{ascending:false});
-      const grid = document.getElementById('news-grid');
-      if (!data?.length) { grid.innerHTML = '<div class="empty-state"><p>خبری نیست</p></div>'; return; }
-      grid.innerHTML = data.map(n => `
-        <article class="news-card">
-          <div class="news-image">${n.image_url?`<img src="${DK.escapeHtml(n.image_url)}" loading="lazy">`:''}</div>
-          <div class="news-body">
-            <div class="news-date">${DK.formatDate(n.published_at||n.created_at)}</div>
-            <h3 class="news-title">${DK.escapeHtml(n.title)}</h3>
-            <p class="news-excerpt">${DK.escapeHtml(n.content)}</p>
-          </div>
-        </article>`).join('');
-    });
-  </script>
-</body>
-</html>
+
+
+      .news-detail-title {
+
+        font-size:
+          1.8rem;
+
+      }
+
+
+      .news-detail-content {
+
+        line-height:
+          2;
+
+      }
+
+    }
+
+  </style></head><body>  <!-- ================================
+       Header
+  ================================= -->  <header class="header"><div class="container header-inner">
+
+
+  <a
+    href="index.html"
+    class="logo"
+  >
+
+    <span class="logo-icon">
+      ⚔
+    </span>
+
+    <span class="logo-text">
+      DARKKNIGHT
+    </span>
+
+  </a>
+
+
+  <nav
+    class="nav"
+    id="nav"
+  >
+
+    <a
+      href="index.html"
+      class="nav-link"
+    >
+      خانه
+    </a>
+
+
+    <a
+      href="projects.html"
+      class="nav-link"
+    >
+      پروژه‌ها
+    </a>
+
+
+    <a
+      href="news.html"
+      class="nav-link active"
+    >
+      اخبار
+    </a>
+
+
+    <a
+      href="support.html"
+      class="nav-link"
+    >
+      پشتیبانی
+    </a>
+
+
+    <a
+      href="admin.html"
+      class="nav-link nav-admin"
+    >
+      پنل مدیریت
+    </a>
+
+  </nav>
+
+
+  <div class="header-actions">
+
+
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      aria-label="تغییر تم"
+      title="تغییر تم"
+    >
+      ☀
+    </button>
+
+
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-label="منو"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
+
+  </div>
+
+</div>
+
+  </header>  <!-- ================================
+       Hero
+  ================================= -->  <div class="page-hero"><div class="container">
+
+  <h1 id="page-title">
+    اخبار
+  </h1>
+
+  <p id="page-description">
+    آخرین اخبار استودیو
+  </p>
+
+</div>
+
+  </div>  <!-- ================================
+       Main
+  ================================= -->  <main class="section"><div class="container">
+
+
+  <!-- News List -->
+
+  <div
+    class="news-grid"
+    id="news-grid"
+  >
+
+    <div class="loading-state">
+
+      <div class="spinner"></div>
+
+      <p>
+        در حال بارگذاری اخبار...
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================================
+       News Detail
+  ================================= -->
+
+  <div
+    id="news-detail"
+    class="news-detail"
+    style="display: none;"
+  >
+
+
+    <div class="news-back">
+
+      <button
+        id="back-to-news"
+        type="button"
+        class="btn btn-secondary"
+      >
+        ← بازگشت به اخبار
+      </button>
+
+    </div>
+
+
+    <article class="news-detail-card">
+
+
+      <div
+        id="news-detail-image"
+        class="news-detail-image"
+      >
+      </div>
+
+
+      <div class="news-detail-body">
+
+
+        <div
+          id="news-detail-date"
+          class="news-detail-date"
+        >
+        </div>
+
+
+        <h1
+          id="news-detail-title"
+          class="news-detail-title"
+        >
+        </h1>
+
+
+        <div
+          id="news-detail-content"
+          class="news-detail-content"
+        >
+        </div>
+
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+
+  <!-- ================================
+       Error
+  ================================= -->
+
+  <div
+    id="news-error"
+    class="news-detail-error"
+    style="display: none;"
+  >
+
+    <div
+      class="news-detail-error-icon"
+    >
+      ⚠️
+    </div>
+
+
+    <h2>
+      خبر پیدا نشد
+    </h2>
+
+
+    <p>
+      این خبر وجود ندارد یا دیگر در دسترس نیست.
+    </p>
+
+
+    <button
+      id="error-back-button"
+      type="button"
+      class="btn btn-secondary"
+    >
+      ← بازگشت به اخبار
+    </button>
+
+  </div>
+
+
+</div>
+
+  </main>  <!-- Toast -->  <div
+    id="toast-container"
+    class="toast-container"
+  ></div>  <!-- ================================
+       Supabase Config
+  ================================= -->  <script>
+
+    window.DK_CONFIG = {
+
+      SUPABASE_URL:
+        'https://exaryvtjayuwgyqnioem.supabase.co',
+
+      SUPABASE_ANON_KEY:
+        'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+
+    };
+
+  </script>  <!-- Supabase -->  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>  <!-- DARKKNIGHT Scripts -->  <script src="js/utils.js"></script>  <script src="js/supabase.js"></script>  <script src="js/theme.js"></script>  <!-- ================================
+       News System
+  ================================= -->  <script>
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      async () => {
+
+
+        /* ================================
+           Elements
+        ================================= */
+
+        const grid =
+          document.getElementById(
+            'news-grid'
+          );
+
+
+        const detail =
+          document.getElementById(
+            'news-detail'
+          );
+
+
+        const errorBox =
+          document.getElementById(
+            'news-error'
+          );
+
+
+        const pageTitle =
+          document.getElementById(
+            'page-title'
+          );
+
+
+        const pageDescription =
+          document.getElementById(
+            'page-description'
+          );
+
+
+        const backButton =
+          document.getElementById(
+            'back-to-news'
+          );
+
+
+        const errorBackButton =
+          document.getElementById(
+            'error-back-button'
+          );
+
+
+        const menuToggle =
+          document.getElementById(
+            'menu-toggle'
+          );
+
+
+        const nav =
+          document.getElementById(
+            'nav'
+          );
+
+
+
+        /* ================================
+           Mobile Menu
+        ================================= */
+
+        menuToggle?.addEventListener(
+          'click',
+          () => {
+
+            menuToggle.classList.toggle(
+              'open'
+            );
+
+            nav.classList.toggle(
+              'open'
+            );
+
+          }
+        );
+
+
+
+        /* ================================
+           Back
+        ================================= */
+
+        function goBackToNews() {
+
+          /*
+           * If this page was opened from
+           * the news list, browser back is
+           * the cleanest option.
+           */
+
+          if (
+            window.history.length > 1 &&
+            document.referrer
+          ) {
+
+            window.history.back();
+
+          } else {
+
+            window.location.href =
+              'news.html';
+
+          }
+
+        }
+
+
+        backButton?.addEventListener(
+          'click',
+          goBackToNews
+        );
+
+
+        errorBackButton?.addEventListener(
+          'click',
+          () => {
+
+            window.location.href =
+              'news.html';
+
+          }
+        );
+
+
+
+        /* ================================
+           Supabase Check
+        ================================= */
+
+        if (
+          !window.DK ||
+          !window.DK.isConfigured ||
+          !window.DK.supabase
+        ) {
+
+          grid.innerHTML = `
+
+            <div class="empty-state">
+
+              <p>
+                Supabase تنظیم نشده است.
+              </p>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+
+        /* ================================
+           Read URL
+        ================================= */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const newsId =
+          params.get('id');
+
+
+
+        /* ================================
+           Detail or List
+        ================================= */
+
+        if (newsId) {
+
+          await loadNewsDetail(
+            newsId
+          );
+
+        } else {
+
+          await loadNews();
+
+        }
+
+
+
+        /* ================================
+           Load News List
+        ================================= */
+
+        async function loadNews() {
+
+          try {
+
+
+            const {
+              data,
+              error
+            } =
+              await window.DK.supabase
+
+                .from('news')
+
+                .select('*')
+
+                .eq(
+                  'status',
+                  'PUBLISHED'
+                )
+
+                .order(
+                  'published_at',
+                  {
+                    ascending: false
+                  }
+                );
+
+
+            if (error) {
+
+              throw error;
+
+            }
+
+
+            if (
+              !data ||
+              !data.length
+            ) {
+
+              grid.innerHTML = `
+
+                <div class="empty-state">
+
+                  <p>
+                    خبری نیست
+                  </p>
+
+                </div>
+
+              `;
+
+              return;
+
+            }
+
+
+            grid.innerHTML =
+              data
+                .map(
+                  createNewsCard
+                )
+                .join('');
+
+
+
+            /* ================================
+               Card Click
+            ================================= */
+
+            grid
+              .querySelectorAll(
+                '[data-news-id]'
+              )
+              .forEach(
+                card => {
+
+
+                  card.addEventListener(
+                    'click',
+                    () => {
+
+                      const id =
+                        card.dataset.newsId;
+
+                      if (!id) {
+                        return;
+                      }
+
+
+                      window.location.href =
+                        `news.html?id=${encodeURIComponent(id)}`;
+
+                    }
+                  );
+
+
+
+                  /* Keyboard */
+
+                  card.addEventListener(
+                    'keydown',
+                    event => {
+
+                      if (
+                        event.key === 'Enter' ||
+                        event.key === ' '
+                      ) {
+
+                        event.preventDefault();
+
+
+                        const id =
+                          card.dataset.newsId;
+
+
+                        if (!id) {
+                          return;
+                        }
+
+
+                        window.location.href =
+                          `news.html?id=${encodeURIComponent(id)}`;
+
+                      }
+
+                    }
+                  );
+
+
+                }
+              );
+
+
+          } catch (error) {
+
+            console.error(
+              'News error:',
+              error
+            );
+
+
+            grid.innerHTML = `
+
+              <div class="empty-state">
+
+                <p>
+                  خطا در بارگذاری اخبار
+                </p>
+
+              </div>
+
+            `;
+
+          }
+
+        }
+
+
+
+        /* ================================
+           Create News Card
+        ================================= */
+
+        function createNewsCard(
+          news
+        ) {
+
+          const image =
+            news.image_url
+              ? `
+
+                <img
+                  src="${window.DK.escapeHtml(
+                    news.image_url
+                  )}"
+                  alt="${window.DK.escapeHtml(
+                    news.title || 'خبر'
+                  )}"
+                  loading="lazy"
+                >
+
+              `
+              : '';
+
+
+
+          return `
+
+            <article
+              class="news-card"
+              data-news-id="${window.DK.escapeHtml(
+                String(news.id)
+              )}"
+              tabindex="0"
+              role="button"
+              aria-label="مشاهده ${window.DK.escapeHtml(
+                news.title || 'خبر'
+              )}"
+            >
+
+
+              <div class="news-image">
+
+                ${image}
+
+              </div>
+
+
+              <div class="news-body">
+
+
+                <div class="news-date">
+
+                  ${window.DK.formatDate(
+                    news.published_at ||
+                    news.created_at
+                  )}
+
+                </div>
+
+
+                <h3 class="news-title">
+
+                  ${window.DK.escapeHtml(
+                    news.title || ''
+                  )}
+
+                </h3>
+
+
+                <p class="news-excerpt">
+
+                  ${window.DK.escapeHtml(
+                    news.content || ''
+                  )}
+
+                </p>
+
+
+                <div class="news-read-more">
+
+                  مشاهده متن کامل ←
+
+                </div>
+
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+
+
+
+        /* ================================
+           Load News Detail
+        ================================= */
+
+        async function loadNewsDetail(
+          id
+        ) {
+
+
+          grid.style.display =
+            'none';
+
+
+          detail.style.display =
+            'none';
+
+
+          errorBox.style.display =
+            'none';
+
+
+
+          try {
+
+
+            const {
+              data,
+              error
+            } =
+              await window.DK.supabase
+
+                .from('news')
+
+                .select('*')
+
+                .eq(
+                  'id',
+                  id
+                )
+
+                .eq(
+                  'status',
+                  'PUBLISHED'
+                )
+
+                .maybeSingle();
+
+
+
+            if (error) {
+
+              throw error;
+
+            }
+
+
+
+            if (!data) {
+
+              showNewsError();
+
+              return;
+
+            }
+
+
+
+            renderNewsDetail(
+              data
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              'News detail error:',
+              error
+            );
+
+
+            showNewsError();
+
+          }
+
+        }
+
+
+
+        /* ================================
+           Render Detail
+        ================================= */
+
+        function renderNewsDetail(
+          news
+        ) {
+
+
+          detail.style.display =
+            'block';
+
+
+          errorBox.style.display =
+            'none';
+
+
+          pageTitle.textContent =
+            'جزئیات خبر';
+
+
+          pageDescription.textContent =
+            'خبر کامل DARKKNIGHT STUDIO';
+
+
+
+          const title =
+            document.getElementById(
+              'news-detail-title'
+            );
+
+
+          const date =
+            document.getElementById(
+              'news-detail-date'
+            );
+
+
+          const content =
+            document.getElementById(
+              'news-detail-content'
+            );
+
+
+          const image =
+            document.getElementById(
+              'news-detail-image'
+            );
+
+
+
+          /* Title */
+
+          title.textContent =
+            news.title || 'بدون عنوان';
+
+
+
+          /* Date */
+
+          date.textContent =
+            window.DK.formatDate(
+              news.published_at ||
+              news.created_at
+            );
+
+
+
+          /* Content */
+
+          content.textContent =
+            news.content || '';
+
+
+
+          /* Image */
+
+          if (news.image_url) {
+
+            image.innerHTML = `
+
+              <img
+                src="${window.DK.escapeHtml(
+                  news.image_url
+                )}"
+                alt="${window.DK.escapeHtml(
+                  news.title || 'خبر'
+                )}"
+              >
+
+            `;
+
+          } else {
+
+            image.innerHTML =
+              '';
+
+          }
+
+
+
+          /* Scroll */
+
+          window.scrollTo({
+
+            top: 0,
+
+            behavior: 'smooth'
+
+          });
+
+
+        }
+
+
+
+        /* ================================
+           Error
+        ================================= */
+
+        function showNewsError() {
+
+
+          grid.style.display =
+            'none';
+
+
+          detail.style.display =
+            'none';
+
+
+          errorBox.style.display =
+            'block';
+
+
+          pageTitle.textContent =
+            'خبر پیدا نشد';
+
+
+          pageDescription.textContent =
+            'این خبر در دسترس نیست.';
+
+
+
+          window.scrollTo({
+
+            top: 0,
+
+            behavior: 'smooth'
+
+          });
+
+        }
+
+
+      }
+    );
+
+  </script></body></html>
