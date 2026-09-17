@@ -142,7 +142,7 @@ const Support = {
       }
 
       if (ticket.status === 'CLOSED') {
-        DK.toast('این تیکت بسته شده و به زودی حذف می‌شه.', 'info');
+        DK.toast('این تیکت بسته شده است. امکان ارسال پیام جدید وجود ندارد.', 'info');
       }
 
       this.currentTicket = ticket;
