@@ -1,12 +1,36 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta name="description" content="فرم عضویت در تیم DARKKNIGHT STUDIO">
-  <meta name="theme-color" content="#0a0a0f">  <title>عضویت در تیم | DARKKNIGHT STUDIO</title>  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>">  <link rel="stylesheet" href="css/themes.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="فرم عضویت در تیم DARKKNIGHT STUDIO"
+  >
+
+  <meta name="theme-color" content="#0a0a0f">
+
+  <title>عضویت در تیم | DARKKNIGHT STUDIO</title>
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>"
+  >
+
+  <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <style>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
     .team-page {
       min-height: calc(100vh - var(--header-h));
       padding: 120px 0 80px;
@@ -36,7 +60,10 @@
 
     .team-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, 380px);
+
       gap: 24px;
       align-items: start;
     }
@@ -91,13 +118,23 @@
       color: var(--text);
       outline: none;
       font-family: inherit;
-      transition: border-color var(--transition), box-shadow var(--transition);
+
+      transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent);
+
+      box-shadow:
+        0 0 0 3px
+        color-mix(
+          in srgb,
+          var(--primary) 15%,
+          transparent
+        );
     }
 
     .form-group textarea {
@@ -119,9 +156,24 @@
     .team-note {
       padding: 14px 16px;
       margin-bottom: 20px;
+
       border-radius: var(--radius);
-      background: color-mix(in srgb, var(--primary) 8%, var(--surface));
-      border: 1px solid color-mix(in srgb, var(--primary) 20%, var(--border));
+
+      background:
+        color-mix(
+          in srgb,
+          var(--primary) 8%,
+          var(--surface)
+        );
+
+      border:
+        1px solid
+        color-mix(
+          in srgb,
+          var(--primary) 20%,
+          var(--border)
+        );
+
       color: var(--text-muted);
       font-size: 0.88rem;
       line-height: 1.8;
@@ -136,9 +188,12 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
+
       padding: 15px;
+
       border: 1px solid var(--border);
       border-radius: var(--radius);
+
       background: var(--bg);
     }
 
@@ -202,513 +257,983 @@
         padding: 20px;
       }
     }
-  </style></head><body>  <div id="app"><!-- Maintenance Overlay -->
-<div id="maintenance-overlay" class="maintenance-overlay hidden">
-  <div class="maintenance-content">
-    <div class="maintenance-icon">⚔</div>
-    <h1>در حال تعمیرات</h1>
-    <p>سایت موقتاً در دسترس نیست. به زودی برمی‌گردیم.</p>
-  </div>
-</div>
+  </style>
+</head>
 
-<!-- Header -->
-<header class="header" id="header">
-  <div class="container header-inner">
+<body>
 
-    <a href="index.html" class="logo">
-      <span class="logo-icon">⚔</span>
-      <span class="logo-text">DARKKNIGHT</span>
-    </a>
+  <div id="app">
 
-    <nav class="nav" id="nav">
-      <a href="index.html" class="nav-link">خانه</a>
-      <a href="index.html#about" class="nav-link">درباره</a>
-      <a href="projects.html" class="nav-link">پروژه‌ها</a>
-      <a href="news.html" class="nav-link">اخبار</a>
-      <a href="index.html#team" class="nav-link">تیم</a>
-      <a href="index.html#stats" class="nav-link">آمار</a>
-      <a href="support.html" class="nav-link">پشتیبانی</a>
-      <a href="admin.html" class="nav-link nav-admin">پنل مدیریت</a>
-    </nav>
+    <!-- Maintenance Overlay -->
+    <div
+      id="maintenance-overlay"
+      class="maintenance-overlay hidden"
+    >
+      <div class="maintenance-content">
+        <div class="maintenance-icon">⚔</div>
 
-    <div class="header-actions">
-
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="تغییر تم"
-        title="تغییر تم"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-      </button>
-
-      <button
-        class="menu-toggle"
-        id="menu-toggle"
-        aria-label="منو"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-    </div>
-
-  </div>
-</header>
-
-<!-- Main -->
-<main class="team-page">
-
-  <div class="container">
-
-    <div class="team-hero">
-
-      <span class="section-tag">
-        DARKKNIGHT STUDIO
-      </span>
-
-      <h1 class="section-title">
-        به تیم <span class="gradient-text">DARKKNIGHT</span> بپیوند
-      </h1>
-
-      <p>
-        اگر به توسعه بازی، برنامه‌نویسی، طراحی یا فعالیت‌های مرتبط با تکنولوژی علاقه داری،
-        می‌تونی درخواست عضویتت رو برای تیم ما ارسال کنی.
-      </p>
-
-    </div>
-
-    <div class="team-grid">
-
-      <!-- Application -->
-      <section class="team-card">
-
-        <div id="application-container">
-
-          <h2>⚔ فرم عضویت در تیم</h2>
-
-          <p>
-            اطلاعات زیر رو با دقت وارد کن. درخواستت پس از ارسال توسط تیم DARKKNIGHT بررسی می‌شه.
-          </p>
-
-          <div class="team-note">
-            💡 بعضی اطلاعات اختیاری هستند. اطلاعاتی که برای بررسی درخواستت مهم‌تر هستند رو کامل بنویس.
-          </div>
-
-          <form id="team-form" class="team-form">
-
-            <div class="form-row">
-
-              <div class="form-group">
-
-                <label for="team-name">
-                  نام <span class="required">*</span>
-                </label>
-
-                <input
-                  id="team-name"
-                  type="text"
-                  maxlength="100"
-                  autocomplete="name"
-                  placeholder="نام شما"
-                  required
-                >
-
-              </div>
-
-              <div class="form-group">
-
-                <label for="team-username">
-                  نام کاربری
-                  <span class="optional">(اختیاری)</span>
-                </label>
-
-                <input
-                  id="team-username"
-                  type="text"
-                  maxlength="100"
-                  autocomplete="username"
-                  placeholder="@username"
-                >
-
-              </div>
-
-            </div>
-
-            <div class="form-row">
-
-              <div class="form-group">
-
-                <label for="team-age">
-                  سن
-                  <span class="optional">(اختیاری)</span>
-                </label>
-
-                <input
-                  id="team-age"
-                  type="number"
-                  min="1"
-                  max="120"
-                  placeholder="مثلاً 18"
-                >
-
-              </div>
-
-              <div class="form-group">
-
-                <label for="team-contact">
-                  راه ارتباطی
-                  <span class="optional">(اختیاری)</span>
-                </label>
-
-                <input
-                  id="team-contact"
-                  type="text"
-                  maxlength="200"
-                  placeholder="مثلاً Bale / Discord"
-                >
-
-              </div>
-
-            </div>
-
-            <div class="form-group">
-
-              <label for="team-skills">
-                مهارت‌ها
-                <span class="required">*</span>
-              </label>
-
-              <textarea
-                id="team-skills"
-                maxlength="2000"
-                placeholder="مثلاً Python، JavaScript، طراحی UI، Blender و..."
-                required
-              ></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-              <label for="team-experience">
-                تجربه
-                <span class="optional">(اختیاری)</span>
-              </label>
-
-              <textarea
-                id="team-experience"
-                maxlength="3000"
-                placeholder="درباره تجربه‌ها و پروژه‌هایی که قبلاً انجام دادی بنویس..."
-              ></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-              <label for="team-portfolio">
-                نمونه‌کار
-                <span class="optional">(اختیاری)</span>
-              </label>
-
-              <input
-                id="team-portfolio"
-                type="url"
-                maxlength="500"
-                placeholder="https://..."
-              >
-
-            </div>
-
-            <div class="form-group">
-
-              <label for="team-message">
-                معرفی / توضیحات
-                <span class="required">*</span>
-              </label>
-
-              <textarea
-                id="team-message"
-                maxlength="5000"
-                placeholder="خودت رو معرفی کن و بگو چرا دوست داری به DARKKNIGHT STUDIO بپیوندی..."
-                required
-              ></textarea>
-
-            </div>
-
-            <button
-              id="team-submit"
-              type="submit"
-              class="btn btn-primary"
-            >
-              ارسال درخواست عضویت
-            </button>
-
-          </form>
-
-        </div>
-
-        <!-- Success -->
-        <div id="success-box" class="success-box">
-
-          <div class="success-icon">✅</div>
-
-          <h2>درخواستت ارسال شد!</h2>
-
-          <p>
-            درخواست عضویت شما با موفقیت ثبت شد و پس از بررسی توسط تیم DARKKNIGHT
-            نتیجه اعلام خواهد شد.
-          </p>
-
-          <a href="index.html" class="btn btn-secondary">
-            بازگشت به صفحه اصلی
-          </a>
-
-        </div>
-
-      </section>
-
-      <!-- Information -->
-      <aside class="team-card">
-
-        <h2>👥 درباره عضویت</h2>
+        <h1>در حال تعمیرات</h1>
 
         <p>
-          قبل از ارسال درخواست، این موارد رو در نظر داشته باش.
+          سایت موقتاً در دسترس نیست.
+          به زودی برمی‌گردیم.
         </p>
-
-        <div class="team-info">
-
-          <div class="team-info-item">
-
-            <div class="team-info-icon">💻</div>
-
-            <div>
-              <strong>مهارت</strong>
-              <span>
-                زمینه فعالیت و مهارت‌هات رو واضح بنویس تا بهتر با توانایی‌هات آشنا بشیم.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="team-info-item">
-
-            <div class="team-info-icon">🚀</div>
-
-            <div>
-              <strong>تجربه</strong>
-              <span>
-                اگر پروژه یا فعالیت قبلی داری، توضیح کوتاهی درباره‌ش بنویس.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="team-info-item">
-
-            <div class="team-info-icon">🔗</div>
-
-            <div>
-              <strong>نمونه‌کار</strong>
-              <span>
-                لینک GitHub، سایت یا نمونه‌کارهای مرتبطت رو در صورت داشتن وارد کن.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="team-info-item">
-
-            <div class="team-info-icon">⚔</div>
-
-            <div>
-              <strong>بررسی درخواست</strong>
-              <span>
-                همه درخواست‌ها قبل از پذیرش توسط تیم بررسی می‌شن.
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="team-note" style="margin-top: 20px; margin-bottom: 0;">
-          🔒 اطلاعات درخواست عضویت فقط برای بررسی درخواست استفاده می‌شود.
-        </div>
-
-      </aside>
-
+      </div>
     </div>
 
-  </div>
 
-</main>
+    <!-- Header -->
+    <header class="header" id="header">
 
-<!-- Footer -->
-<footer class="footer">
-
-  <div class="container">
-
-    <div class="footer-grid">
-
-      <div class="footer-brand">
+      <div class="container header-inner">
 
         <a href="index.html" class="logo">
+
           <span class="logo-icon">⚔</span>
-          <span class="logo-text">DARKKNIGHT</span>
+
+          <span class="logo-text">
+            DARKKNIGHT
+          </span>
+
         </a>
 
-        <p>
-          استودیوی حرفه‌ای توسعه بازی و نرم‌افزار
-        </p>
+
+        <nav class="nav" id="nav">
+
+          <a
+            href="index.html"
+            class="nav-link"
+          >
+            خانه
+          </a>
+
+          <a
+            href="index.html#about"
+            class="nav-link"
+          >
+            درباره
+          </a>
+
+          <a
+            href="projects.html"
+            class="nav-link"
+          >
+            پروژه‌ها
+          </a>
+
+          <a
+            href="news.html"
+            class="nav-link"
+          >
+            اخبار
+          </a>
+
+          <a
+            href="index.html#team"
+            class="nav-link"
+          >
+            تیم
+          </a>
+
+          <a
+            href="index.html#stats"
+            class="nav-link"
+          >
+            آمار
+          </a>
+
+          <a
+            href="support.html"
+            class="nav-link"
+          >
+            پشتیبانی
+          </a>
+
+          <a
+            href="admin.html"
+            class="nav-link nav-admin"
+          >
+            پنل مدیریت
+          </a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="تغییر تم"
+            title="تغییر تم"
+          >
+
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+              />
+
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+              />
+            </svg>
+
+          </button>
+
+
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="منو"
+          >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </button>
+
+        </div>
 
       </div>
 
-      <div class="footer-links">
+    </header>
 
-        <h4>لینک‌های سریع</h4>
 
-        <a href="index.html#about">درباره</a>
-        <a href="projects.html">پروژه‌ها</a>
-        <a href="news.html">اخبار</a>
-        <a href="support.html">پشتیبانی</a>
+    <!-- Main -->
+    <main class="team-page">
+
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="team-hero">
+
+          <span class="section-tag">
+            DARKKNIGHT STUDIO
+          </span>
+
+          <h1 class="section-title">
+
+            به تیم
+            <span class="gradient-text">
+              DARKKNIGHT
+            </span>
+            بپیوند
+
+          </h1>
+
+          <p>
+            اگر به توسعه بازی، برنامه‌نویسی، طراحی یا
+            فعالیت‌های مرتبط با تکنولوژی علاقه داری،
+            می‌تونی درخواست عضویتت رو برای تیم ما ارسال کنی.
+          </p>
+
+        </div>
+
+
+        <div class="team-grid">
+
+
+          <!-- Application -->
+          <section class="team-card">
+
+            <div id="application-container">
+
+              <h2>
+                ⚔ فرم عضویت در تیم
+              </h2>
+
+              <p>
+                اطلاعات زیر رو با دقت وارد کن.
+                درخواستت پس از ارسال توسط تیم
+                DARKKNIGHT بررسی می‌شه.
+              </p>
+
+
+              <div class="team-note">
+
+                💡 بعضی اطلاعات اختیاری هستند.
+                اطلاعاتی که برای بررسی درخواستت مهم‌تر
+                هستند رو کامل بنویس.
+
+              </div>
+
+
+              <form
+                id="team-form"
+                class="team-form"
+              >
+
+
+                <!-- Name / Username -->
+                <div class="form-row">
+
+                  <div class="form-group">
+
+                    <label for="team-name">
+
+                      نام
+                      <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                      id="team-name"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="name"
+                      placeholder="نام شما"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="team-username">
+
+                      نام کاربری
+                      <span class="optional">
+                        (اختیاری)
+                      </span>
+
+                    </label>
+
+                    <input
+                      id="team-username"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="username"
+                      placeholder="@username"
+                    >
+
+                  </div>
+
+                </div>
+
+
+                <!-- Age / Contact -->
+                <div class="form-row">
+
+                  <div class="form-group">
+
+                    <label for="team-age">
+
+                      سن
+                      <span class="optional">
+                        (اختیاری)
+                      </span>
+
+                    </label>
+
+                    <input
+                      id="team-age"
+                      type="number"
+                      min="1"
+                      max="120"
+                      placeholder="مثلاً 18"
+                    >
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="team-contact">
+
+                      راه ارتباطی
+                      <span class="optional">
+                        (اختیاری)
+                      </span>
+
+                    </label>
+
+                    <input
+                      id="team-contact"
+                      type="text"
+                      maxlength="200"
+                      placeholder="مثلاً Bale / Discord"
+                    >
+
+                  </div>
+
+                </div>
+
+
+                <!-- Skills -->
+                <div class="form-group">
+
+                  <label for="team-skills">
+
+                    مهارت‌ها
+                    <span class="required">*</span>
+
+                  </label>
+
+                  <textarea
+                    id="team-skills"
+                    maxlength="2000"
+                    placeholder="مثلاً Python، JavaScript، طراحی UI، Blender و..."
+                    required
+                  ></textarea>
+
+                </div>
+
+
+                <!-- Experience -->
+                <div class="form-group">
+
+                  <label for="team-experience">
+
+                    تجربه
+                    <span class="optional">
+                      (اختیاری)
+                    </span>
+
+                  </label>
+
+                  <textarea
+                    id="team-experience"
+                    maxlength="3000"
+                    placeholder="درباره تجربه‌ها و پروژه‌هایی که قبلاً انجام دادی بنویس..."
+                  ></textarea>
+
+                </div>
+
+
+                <!-- Portfolio -->
+                <div class="form-group">
+
+                  <label for="team-portfolio">
+
+                    نمونه‌کار
+                    <span class="optional">
+                      (اختیاری)
+                    </span>
+
+                  </label>
+
+                  <input
+                    id="team-portfolio"
+                    type="url"
+                    maxlength="500"
+                    placeholder="https://..."
+                  >
+
+                </div>
+
+
+                <!-- Message -->
+                <div class="form-group">
+
+                  <label for="team-message">
+
+                    معرفی / توضیحات
+                    <span class="required">*</span>
+
+                  </label>
+
+                  <textarea
+                    id="team-message"
+                    maxlength="5000"
+                    placeholder="خودت رو معرفی کن و بگو چرا دوست داری به DARKKNIGHT STUDIO بپیوندی..."
+                    required
+                  ></textarea>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                  id="team-submit"
+                  type="submit"
+                  class="btn btn-primary"
+                >
+                  ارسال درخواست عضویت
+                </button>
+
+              </form>
+
+            </div>
+
+
+            <!-- Success -->
+            <div
+              id="success-box"
+              class="success-box"
+            >
+
+              <div class="success-icon">
+                ✅
+              </div>
+
+              <h2>
+                درخواستت ارسال شد!
+              </h2>
+
+              <p>
+                درخواست عضویت شما با موفقیت ثبت شد
+                و پس از بررسی توسط تیم DARKKNIGHT
+                نتیجه اعلام خواهد شد.
+              </p>
+
+              <a
+                href="index.html"
+                class="btn btn-secondary"
+              >
+                بازگشت به صفحه اصلی
+              </a>
+
+            </div>
+
+          </section>
+
+
+          <!-- Information -->
+          <aside class="team-card">
+
+            <h2>
+              👥 درباره عضویت
+            </h2>
+
+            <p>
+              قبل از ارسال درخواست، این موارد رو
+              در نظر داشته باش.
+            </p>
+
+
+            <div class="team-info">
+
+
+              <div class="team-info-item">
+
+                <div class="team-info-icon">
+                  💻
+                </div>
+
+                <div>
+
+                  <strong>
+                    مهارت
+                  </strong>
+
+                  <span>
+                    زمینه فعالیت و مهارت‌هات رو واضح
+                    بنویس تا بهتر با توانایی‌هات آشنا بشیم.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="team-info-item">
+
+                <div class="team-info-icon">
+                  🚀
+                </div>
+
+                <div>
+
+                  <strong>
+                    تجربه
+                  </strong>
+
+                  <span>
+                    اگر پروژه یا فعالیت قبلی داری،
+                    توضیح کوتاهی درباره‌ش بنویس.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="team-info-item">
+
+                <div class="team-info-icon">
+                  🔗
+                </div>
+
+                <div>
+
+                  <strong>
+                    نمونه‌کار
+                  </strong>
+
+                  <span>
+                    لینک GitHub، سایت یا نمونه‌کارهای
+                    مرتبطت رو در صورت داشتن وارد کن.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="team-info-item">
+
+                <div class="team-info-icon">
+                  ⚔
+                </div>
+
+                <div>
+
+                  <strong>
+                    بررسی درخواست
+                  </strong>
+
+                  <span>
+                    همه درخواست‌ها قبل از پذیرش توسط
+                    تیم بررسی می‌شن.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div
+              class="team-note"
+              style="margin-top: 20px; margin-bottom: 0;"
+            >
+
+              🔒 اطلاعات درخواست عضویت فقط برای
+              بررسی درخواست استفاده می‌شود.
+
+            </div>
+
+          </aside>
+
+        </div>
 
       </div>
 
-      <div class="footer-links">
+    </main>
 
-        <h4>بیشتر</h4>
 
-        <a href="team.html">عضویت در تیم</a>
-        <a href="admin.html">پنل مدیریت</a>
+    <!-- Footer -->
+    <footer class="footer">
+
+      <div class="container">
+
+        <div class="footer-grid">
+
+
+          <div class="footer-brand">
+
+            <a
+              href="index.html"
+              class="logo"
+            >
+
+              <span class="logo-icon">
+                ⚔
+              </span>
+
+              <span class="logo-text">
+                DARKKNIGHT
+              </span>
+
+            </a>
+
+            <p>
+              استودیوی حرفه‌ای توسعه بازی و نرم‌افزار
+            </p>
+
+          </div>
+
+
+          <div class="footer-links">
+
+            <h4>
+              لینک‌های سریع
+            </h4>
+
+            <a href="index.html#about">
+              درباره
+            </a>
+
+            <a href="projects.html">
+              پروژه‌ها
+            </a>
+
+            <a href="news.html">
+              اخبار
+            </a>
+
+            <a href="support.html">
+              پشتیبانی
+            </a>
+
+          </div>
+
+
+          <div class="footer-links">
+
+            <h4>
+              بیشتر
+            </h4>
+
+            <a href="team.html">
+              عضویت در تیم
+            </a>
+
+            <a href="admin.html">
+              پنل مدیریت
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          <p>
+
+            ©
+            <span id="year"></span>
+            DARKKNIGHT STUDIO.
+            تمامی حقوق محفوظ است.
+
+          </p>
+
+
+          <p class="view-count">
+
+            بازدیدها:
+            <span id="view-count">
+              —
+            </span>
+
+          </p>
+
+        </div>
 
       </div>
 
-    </div>
+    </footer>
 
-    <div class="footer-bottom">
 
-      <p>
-        © <span id="year"></span> DARKKNIGHT STUDIO. تمامی حقوق محفوظ است.
-      </p>
-
-      <p class="view-count">
-        بازدیدها: <span id="view-count">—</span>
-      </p>
-
-    </div>
+    <!-- Toast -->
+    <div
+      id="toast-container"
+      class="toast-container"
+    ></div>
 
   </div>
 
-</footer>
 
-<!-- Toast -->
-<div id="toast-container" class="toast-container"></div>
+  <!-- Supabase Config -->
+  <script>
 
-  </div>  <!-- Supabase Config -->  <script>
     window.DK_CONFIG = {
-      SUPABASE_URL: 'https://exaryvtjayuwgyqnioem.supabase.co',
-      SUPABASE_ANON_KEY: 'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+
+      SUPABASE_URL:
+        'https://exaryvtjayuwgyqnioem.supabase.co',
+
+      SUPABASE_ANON_KEY:
+        'sb_publishable_qKQQ14qEFz1Z8W1mTWHeEg_RDw0awSR'
+
     };
-  </script>  <!-- Libraries -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <!-- DARKKNIGHT Scripts -->  <script src="js/utils.js"></script>  <script src="js/supabase.js"></script>  <script src="js/theme.js"></script>  <script>
-    document.addEventListener('DOMContentLoaded', () => {
 
-      const form = document.getElementById('team-form');
-      const applicationContainer = document.getElementById('application-container');
-      const successBox = document.getElementById('success-box');
-      const submitButton = document.getElementById('team-submit');
+  </script>
 
-      if (!form) return;
 
-      form.addEventListener('submit', async (event) => {
+  <!-- Supabase -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
-        event.preventDefault();
 
-        const name = document.getElementById('team-name').value.trim();
-        const username = document.getElementById('team-username').value.trim();
-        const ageValue = document.getElementById('team-age').value.trim();
-        const skills = document.getElementById('team-skills').value.trim();
-        const experience = document.getElementById('team-experience').value.trim();
-        const portfolio = document.getElementById('team-portfolio').value.trim();
-        const contact = document.getElementById('team-contact').value.trim();
-        const message = document.getElementById('team-message').value.trim();
+  <!-- DARKKNIGHT Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/theme.js"></script>
 
-        if (!name || !skills || !message) {
-          showTeamError('لطفاً فیلدهای الزامی را کامل کن.');
-          return;
-        }
 
-        const age = ageValue ? Number(ageValue) : null;
+  <!-- Team Application -->
+  <script>
 
-        if (age !== null && (!Number.isInteger(age) || age < 1 || age > 120)) {
-          showTeamError('سن واردشده معتبر نیست.');
-          return;
-        }
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
 
-        submitButton.disabled = true;
-        submitButton.textContent = 'در حال ارسال...';
+        const form =
+          document.getElementById('team-form');
 
-        try {
-
-          const client =
-            window.supabaseClient ||
-            window.supabase ||
-            window.DK_SUPABASE;
-
-          if (!client || typeof client.from !== 'function') {
-            throw new Error('اتصال Supabase پیدا نشد.');
-          }
-
-          const { error } = await client
-            .from('team_applications')
-            .insert({
-              name,
-              username: username || null,
-              age,
-              skills,
-              experience: experience || null,
-              portfolio: portfolio || null,
-              contact: contact || null,
-              message
-            });
-
-          if (error) {
-            throw error;
-          }
-
-          applicationContainer.style.display = 'none';
-          successBox.classList.add('show');
-
-        } catch (error) {
-
-          console.error('Team application error:', error);
-
-          showTeamError(
-            `خطا در ارسال درخواست: ${error.message || 'خطای ناشناخته'}`
+        const applicationContainer =
+          document.getElementById(
+            'application-container'
           );
 
-          submitButton.disabled = false;
-          submitButton.textContent = 'ارسال درخواست عضویت';
-        }
+        const successBox =
+          document.getElementById('success-box');
 
-      });
+        const submitButton =
+          document.getElementById('team-submit');
 
-      function showTeamError(message) {
 
-        if (
-          typeof window.showToast === 'function'
-        ) {
-          window.showToast(message, 'error');
+        if (!form) {
           return;
         }
 
-        alert(message);
-      }
 
-    });
-  </script></body>
+        form.addEventListener(
+          'submit',
+          async (event) => {
+
+            event.preventDefault();
+
+
+            const name =
+              document
+                .getElementById('team-name')
+                .value
+                .trim();
+
+
+            const username =
+              document
+                .getElementById('team-username')
+                .value
+                .trim();
+
+
+            const ageValue =
+              document
+                .getElementById('team-age')
+                .value
+                .trim();
+
+
+            const skills =
+              document
+                .getElementById('team-skills')
+                .value
+                .trim();
+
+
+            const experience =
+              document
+                .getElementById('team-experience')
+                .value
+                .trim();
+
+
+            const portfolio =
+              document
+                .getElementById('team-portfolio')
+                .value
+                .trim();
+
+
+            const contact =
+              document
+                .getElementById('team-contact')
+                .value
+                .trim();
+
+
+            const message =
+              document
+                .getElementById('team-message')
+                .value
+                .trim();
+
+
+            /* Required fields */
+
+            if (
+              !name ||
+              !skills ||
+              !message
+            ) {
+
+              showError(
+                'لطفاً فیلدهای الزامی را کامل کن.'
+              );
+
+              return;
+            }
+
+
+            /* Age */
+
+            const age =
+              ageValue
+                ? Number(ageValue)
+                : null;
+
+
+            if (
+              age !== null &&
+              (
+                !Number.isInteger(age) ||
+                age < 1 ||
+                age > 120
+              )
+            ) {
+
+              showError(
+                'سن واردشده معتبر نیست.'
+              );
+
+              return;
+            }
+
+
+            /* Loading */
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+              'در حال ارسال...';
+
+
+            try {
+
+              /*
+               * IMPORTANT:
+               * The current DARKKNIGHT project
+               * exposes Supabase as:
+               *
+               * window.DK.supabase
+               */
+
+              const client =
+                window.DK &&
+                window.DK.supabase;
+
+
+              if (
+                !client ||
+                typeof client.from !== 'function'
+              ) {
+
+                throw new Error(
+                  'اتصال Supabase پیدا نشد.'
+                );
+
+              }
+
+
+              /*
+               * Do NOT send status here.
+               *
+               * Database default:
+               * PENDING
+               */
+
+              const { error } =
+                await client
+                  .from('team_applications')
+                  .insert({
+
+                    name: name,
+
+                    username:
+                      username || null,
+
+                    age: age,
+
+                    skills: skills,
+
+                    experience:
+                      experience || null,
+
+                    portfolio:
+                      portfolio || null,
+
+                    contact:
+                      contact || null,
+
+                    message: message
+
+                  });
+
+
+              if (error) {
+                throw error;
+              }
+
+
+              /* Success */
+
+              applicationContainer.style.display =
+                'none';
+
+              successBox.classList.add(
+                'show'
+              );
+
+
+            } catch (error) {
+
+              console.error(
+                'Team application error:',
+                error
+              );
+
+
+              showError(
+                `خطا در ارسال درخواست: ${
+                  error.message ||
+                  'خطای ناشناخته'
+                }`
+              );
+
+
+              submitButton.disabled =
+                false;
+
+              submitButton.textContent =
+                'ارسال درخواست عضویت';
+
+            }
+
+          }
+        );
+
+
+        function showError(message) {
+
+          if (
+            typeof window.showToast ===
+            'function'
+          ) {
+
+            window.showToast(
+              message,
+              'error'
+            );
+
+            return;
+          }
+
+
+          alert(message);
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
   </html>
