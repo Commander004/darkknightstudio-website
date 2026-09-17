@@ -690,13 +690,14 @@ const Admin = {
       .order('created_at', { ascending: false });
 
     if (!data?.length) {
-      tbody.innerHTML = '<tr><td colspan="5">درخواستی نیست</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6">درخواستی نیست</td></tr>';
       return;
     }
     tbody.innerHTML = data.map(a => `
       <tr>
-        <td>${DK.escapeHtml(a.name)}</td>
-        <td>${DK.escapeHtml(DK.truncate(a.skills, 40))}</td>
+        <td>${DK.escapeHtml(a.name || '')}</td>
+        <td><code style="user-select:all;font-size:0.85rem">${DK.escapeHtml(a.contact || a.username || '—')}</code></td>
+        <td>${DK.escapeHtml(DK.truncate(a.skills || '', 40))}</td>
         <td><span class="badge badge-info">${DK.statusLabel(a.status)}</span></td>
         <td>${DK.timeAgo(a.created_at)}</td>
         <td class="admin-actions">
