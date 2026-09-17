@@ -21,7 +21,7 @@
 @media (max-width: 768px) {
   .nav {
     position: fixed;
-    top: var(--header-h);
+    top: calc(var(--header-h) + 32px);
     left: 0;
     right: 0;
     bottom: 0;
@@ -122,3 +122,11 @@
 }
 
 /* Admin panel responsive is in admin.css */
+
+
+@media (max-width: 480px) {
+  .beta-banner {
+    font-size: 0.7rem;
+    padding: 0 8px;
+  }
+}
