@@ -546,7 +546,9 @@ const Admin = {
         <td>${DK.timeAgo(t.created_at)}</td>
         <td class="admin-actions">
           <button class="btn btn-ghost btn-sm" onclick="Admin.viewTicket('${t.id}')">مشاهده</button>
-          ${t.status !== 'CLOSED' ? `<button class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${t.id}')">بستن</button>` : ''}
+          ${t.status !== 'CLOSED'
+            ? `<button class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${t.id}')">بستن</button>`
+            : `<button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="Admin.deleteTicket('${t.id}')">حذف</button>`}
         </td>
       </tr>
     `).join('');
@@ -579,11 +581,15 @@ const Admin = {
           <label class="form-label">پاسخ ادمین</label>
           <textarea class="form-textarea" id="admin-reply"></textarea>
         </div>
-      ` : '<p style="color:var(--warning)">تیکت بسته شده — تا ۲۰ ثانیه دیگر حذف می‌شود</p>'}
+      ` : '<p style="color:var(--warning)">تیکت بسته شده. می‌توانید آن را برای همیشه حذف کنید تا دیگر کسی نتواند ببیند.</p>'}
     `, ticket?.status !== 'CLOSED' ? `
       <button class="btn btn-secondary" onclick="Admin.closeModal()">بستن</button>
       <button class="btn btn-primary" onclick="Admin.replyTicket('${id}')">ارسال پاسخ</button>
-    ` : `<button class="btn btn-secondary" onclick="Admin.closeModal()">بستن</button>`);
+      <button class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${id}')">بستن تیکت</button>
+    ` : `
+      <button class="btn btn-secondary" onclick="Admin.closeModal()">بستن</button>
+      <button class="btn btn-danger" onclick="Admin.deleteTicket('${id}')">حذف کامل تیکت</button>
+    `);
   },
 
   async replyTicket(id) {
@@ -610,11 +616,34 @@ const Admin = {
   },
 
   async closeTicket(id) {
-    if (!DK.confirm('تیکت بسته بشه؟ بعد از ۲۰ ثانیه حذف می‌شه.')) return;
-    // Use DB function for reliable delayed delete
-    await DK.supabase.rpc('close_ticket', { ticket_uuid: id });
+    if (!DK.confirm('تیکت بسته بشه؟ بعد از بستن می‌تونی کامل حذفش کنی.')) return;
+    const { error } = await DK.supabase.rpc('close_ticket', { ticket_uuid: id });
+    if (error) {
+      // fallback if RPC unavailable
+      await DK.supabase.from('tickets').update({
+        status: 'CLOSED',
+        closed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }).eq('id', id);
+    }
     this.logAction('close', 'ticket', id, {});
-    DK.toast('تیکت بسته شد. حذف خودکار تا ۲۰ ثانیه دیگر.', 'info');
+    DK.toast('تیکت بسته شد. حالا می‌تونی حذف کامل کنی.', 'info');
+    this.closeModal();
+    this.loadTickets();
+    // Immediately open view so delete button is visible
+    setTimeout(() => this.viewTicket(id), 200);
+  },
+
+  async deleteTicket(id) {
+    if (!DK.confirm('تیکت برای همیشه حذف شود؟ دیگر کسی نمی‌تواند آن را ببیند.')) return;
+    const { error } = await DK.supabase.from('tickets').delete().eq('id', id);
+    if (error) {
+      DK.toast('خطا در حذف تیکت: ' + (error.message || 'نامشخص'), 'error');
+      return;
+    }
+    this.logAction('delete', 'ticket', id, {});
+    DK.toast('تیکت کامل حذف شد', 'success');
+    this.closeModal();
     this.loadTickets();
   },
 
