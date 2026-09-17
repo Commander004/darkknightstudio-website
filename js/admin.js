@@ -526,41 +526,58 @@ const Admin = {
   // ========== TICKETS ==========
   async loadTickets() {
     const tbody = document.getElementById('tickets-tbody');
-    const { data } = await DK.supabase
+    if (!tbody) return;
+
+    const { data, error } = await DK.supabase
       .from('tickets')
       .select('*')
       .order('created_at', { ascending: false })
       .limit(50);
+
+    if (error) {
+      tbody.innerHTML = `<tr><td colspan="6">خطا: ${DK.escapeHtml(error.message)}</td></tr>`;
+      return;
+    }
 
     if (!data?.length) {
       tbody.innerHTML = '<tr><td colspan="6">تیکتی نیست</td></tr>';
       return;
     }
 
-    tbody.innerHTML = data.map(t => `
-      <tr>
+    tbody.innerHTML = data.map(t => {
+      const st = String(t.status || '').toUpperCase();
+      const isClosed = st === 'CLOSED';
+      return `
+      <tr data-ticket-id="${t.id}">
         <td>${DK.escapeHtml(t.subject)}</td>
-        <td><span class="badge ${t.status === 'OPEN' ? 'badge-success' : t.status === 'CLOSED' ? 'badge-muted' : 'badge-warning'}">${DK.statusLabel(t.status)}</span></td>
-        <td>${t.priority}</td>
-        <td>${DK.escapeHtml(t.creator_name)}</td>
+        <td><span class="badge ${st === 'OPEN' ? 'badge-success' : isClosed ? 'badge-muted' : 'badge-warning'}">${DK.statusLabel(t.status)}</span></td>
+        <td>${DK.escapeHtml(String(t.priority || ''))}</td>
+        <td>${DK.escapeHtml(t.creator_name || '')}</td>
         <td>${DK.timeAgo(t.created_at)}</td>
         <td class="admin-actions">
-          <button class="btn btn-ghost btn-sm" onclick="Admin.viewTicket('${t.id}')">مشاهده</button>
-          ${t.status !== 'CLOSED'
-            ? `<button class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${t.id}')">بستن</button>`
-            : `<button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="Admin.deleteTicket('${t.id}')">حذف</button>`}
+          <button type="button" class="btn btn-ghost btn-sm" onclick="Admin.viewTicket('${t.id}')">مشاهده</button>
+          ${!isClosed ? `<button type="button" class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${t.id}')">بستن</button>` : ''}
+          <button type="button" class="btn btn-sm" style="color:#fff;background:var(--danger);border:none" onclick="Admin.deleteTicket('${t.id}')">حذف</button>
         </td>
-      </tr>
-    `).join('');
+      </tr>`;
+    }).join('');
   },
 
   async viewTicket(id) {
-    const { data: ticket } = await DK.supabase.from('tickets').select('*').eq('id', id).single();
+    const { data: ticket, error } = await DK.supabase.from('tickets').select('*').eq('id', id).single();
+    if (error || !ticket) {
+      DK.toast('تیکت پیدا نشد (ممکن است حذف شده باشد)', 'error');
+      this.loadTickets();
+      return;
+    }
+
     const { data: messages } = await DK.supabase
       .from('ticket_messages')
       .select('*')
       .eq('ticket_id', id)
       .order('created_at');
+
+    const isClosed = String(ticket.status || '').toUpperCase() === 'CLOSED';
 
     const msgsHtml = (messages || []).map(m => `
       <div style="margin-bottom:10px;padding:10px;background:var(--bg);border-radius:8px">
@@ -570,39 +587,47 @@ const Admin = {
       </div>
     `).join('');
 
-    this.openModal(`تیکت: ${ticket?.subject || ''}`, `
+    const body = `
       <div style="margin-bottom:12px;font-size:0.85rem;color:var(--text-muted)">
-        وضعیت: ${DK.statusLabel(ticket?.status)} · اولویت: ${ticket?.priority}<br>
-        از: ${DK.escapeHtml(ticket?.creator_name)} ${ticket?.creator_email ? '(' + DK.escapeHtml(ticket.creator_email) + ')' : ''}
+        وضعیت: ${DK.statusLabel(ticket.status)} · اولویت: ${ticket.priority || '—'}<br>
+        از: ${DK.escapeHtml(ticket.creator_name || '')} ${ticket.creator_email ? '(' + DK.escapeHtml(ticket.creator_email) + ')' : ''}
       </div>
       <div style="max-height:300px;overflow-y:auto;margin-bottom:16px">${msgsHtml || '<p>پیامی نیست</p>'}</div>
-      ${ticket?.status !== 'CLOSED' ? `
+      ${!isClosed ? `
         <div class="form-group">
           <label class="form-label">پاسخ ادمین</label>
           <textarea class="form-textarea" id="admin-reply"></textarea>
         </div>
-      ` : '<p style="color:var(--warning)">تیکت بسته شده. می‌توانید آن را برای همیشه حذف کنید تا دیگر کسی نتواند ببیند.</p>'}
-    `, ticket?.status !== 'CLOSED' ? `
-      <button class="btn btn-secondary" onclick="Admin.closeModal()">بستن</button>
-      <button class="btn btn-primary" onclick="Admin.replyTicket('${id}')">ارسال پاسخ</button>
-      <button class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${id}')">بستن تیکت</button>
+      ` : `
+        <p style="color:var(--warning);margin-bottom:12px">تیکت بسته شده است. برای پاک شدن دائمی روی «حذف کامل تیکت» بزنید.</p>
+      `}
+    `;
+
+    const footer = !isClosed ? `
+      <button type="button" class="btn btn-secondary" onclick="Admin.closeModal()">بستن پنجره</button>
+      <button type="button" class="btn btn-primary" onclick="Admin.replyTicket('${id}')">ارسال پاسخ</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="Admin.closeTicket('${id}')">بستن تیکت</button>
+      <button type="button" class="btn btn-sm" style="color:#fff;background:var(--danger);border:none" onclick="Admin.deleteTicket('${id}')">حذف</button>
     ` : `
-      <button class="btn btn-secondary" onclick="Admin.closeModal()">بستن</button>
-      <button class="btn btn-danger" onclick="Admin.deleteTicket('${id}')">حذف کامل تیکت</button>
-    `);
+      <button type="button" class="btn btn-secondary" onclick="Admin.closeModal()">بستن پنجره</button>
+      <button type="button" class="btn btn-sm" style="color:#fff;background:var(--danger);border:none;padding:10px 18px;font-weight:700" onclick="Admin.deleteTicket('${id}')">حذف کامل تیکت</button>
+    `;
+
+    this.openModal(`تیکت: ${ticket.subject || ''}`, body, footer);
   },
 
   async replyTicket(id) {
     const content = document.getElementById('admin-reply')?.value?.trim();
     if (!content) return DK.toast('پیام خالیه', 'error');
 
-    await DK.supabase.from('ticket_messages').insert({
+    const { error } = await DK.supabase.from('ticket_messages').insert({
       ticket_id: id,
       sender_type: 'admin',
       sender_name: this.profile?.display_name || 'Admin',
       sender_admin_id: this.profile?.id,
       content
     });
+    if (error) return DK.toast('خطا در ارسال: ' + error.message, 'error');
 
     await DK.supabase.from('tickets').update({
       status: 'IN_PROGRESS',
@@ -616,31 +641,40 @@ const Admin = {
   },
 
   async closeTicket(id) {
-    if (!DK.confirm('تیکت بسته بشه؟ بعد از بستن می‌تونی کامل حذفش کنی.')) return;
-    const { error } = await DK.supabase.rpc('close_ticket', { ticket_uuid: id });
+    if (!DK.confirm('تیکت بسته بشه؟ بعد از بستن دکمه حذف می‌آید.')) return;
+
+    // Direct update (reliable) + optional RPC
+    const { error } = await DK.supabase.from('tickets').update({
+      status: 'CLOSED',
+      closed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }).eq('id', id);
+
     if (error) {
-      // fallback if RPC unavailable
-      await DK.supabase.from('tickets').update({
-        status: 'CLOSED',
-        closed_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      }).eq('id', id);
+      DK.toast('خطا در بستن تیکت: ' + error.message, 'error');
+      console.error('closeTicket', error);
+      return;
     }
+
+    try { await DK.supabase.rpc('close_ticket', { ticket_uuid: id }); } catch (_) {}
+
     this.logAction('close', 'ticket', id, {});
-    DK.toast('تیکت بسته شد. حالا می‌تونی حذف کامل کنی.', 'info');
+    DK.toast('تیکت بسته شد — الان می‌تونی حذف کنی', 'success');
     this.closeModal();
-    this.loadTickets();
-    // Immediately open view so delete button is visible
-    setTimeout(() => this.viewTicket(id), 200);
+    await this.loadTickets();
+    setTimeout(() => this.viewTicket(id), 250);
   },
 
   async deleteTicket(id) {
-    if (!DK.confirm('تیکت برای همیشه حذف شود؟ دیگر کسی نمی‌تواند آن را ببیند.')) return;
+    if (!DK.confirm('تیکت برای همیشه حذف شود؟ دیگر هیچ‌کس نمی‌تواند آن را ببیند.')) return;
+
     const { error } = await DK.supabase.from('tickets').delete().eq('id', id);
     if (error) {
-      DK.toast('خطا در حذف تیکت: ' + (error.message || 'نامشخص'), 'error');
+      DK.toast('خطا در حذف: ' + (error.message || 'نامشخص'), 'error');
+      console.error('deleteTicket', error);
       return;
     }
+
     this.logAction('delete', 'ticket', id, {});
     DK.toast('تیکت کامل حذف شد', 'success');
     this.closeModal();
